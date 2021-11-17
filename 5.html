@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Homework</title>
 </head>
+
 <body>
-<!--
+  <!--
 Обязательное задание.
 
 Необходимо скопировать и вставить в данный скрипт все функции из 4 задания.
@@ -29,10 +31,62 @@ Infinity делать не нужно, однако, в случае если б
 
 Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
 -->
-<script>
-  "use strict";
+  <script>
+    "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
-</script>
+    const arg1 = Number(prompt('Введите первое число: '));
+    const arg2 = Number(prompt('Введите второе число: '));
+    const operation = prompt('Введите операцию: ');
+
+    console.log(mathOperation(arg1, arg2, operation));
+
+    /** 
+     * Функция выполняет другую функцию, которая, в свою очередь, выполняет 
+     * введенную математическую операцию между двумя введенными числами
+     */
+    function mathOperation(arg1, arg2, operation) {
+      switch (operation) {
+        case '+':
+          console.log(summa(arg1, arg2));
+          break;
+        case '-':
+          console.log(difference(arg1, arg2));
+          break;
+        case '*':
+          console.log(multiplication(arg1, arg2));
+          break;
+        case '/':
+          console.log(division(arg1, arg2));
+          break;
+        default:
+          console.log(NaN);
+      }
+    }
+
+    /** Функция складывает два числа */
+    function summa(a, b) {
+      return a + b;
+    }
+
+    /** Функция вычитает из большего числа меньшее */
+    function difference(a, b) {
+      if (a > b)
+        return a - b;
+      else if (b > a)
+        return b - a;
+      else return 0;
+    }
+
+    /** Функция перемножает два числа */
+    function multiplication(a, b) {
+      return a * b;
+    }
+
+    /** Функция делит первое введенное число на второе */
+    function division(a, b) {
+      return a / b;
+    }
+  </script>
 </body>
+
 </html>

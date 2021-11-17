@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Homework</title>
 </head>
+
 <body>
-<!--
+  <!--
 Необязательное задание.
 
 Необходимо реализовать функцию, которая будет принимать первым аргументом
@@ -22,10 +24,18 @@ console.log(declinationOfNumber(5, "стул", "стула", "стульев"));
 Функция должна работать с любым словом и любым целым положительным числом.
 Все аргументы, которые будут передаваться функции будут верны.
 -->
-<script>
-  "use strict";
+  <script>
+    "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
-</script>
+    const number = Number(prompt('Введите число: '));
+    console.log(declinationOfNumber(number, "стул", "стула", "стульев"));
+
+    function declinationOfNumber(num, word1, word2, word3) {
+      if (num === 1) console.log(word1)
+      else if (num === 2) console.log(word2)
+      else console.log(word3)
+    }
+  </script>
 </body>
+
 </html>

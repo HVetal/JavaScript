@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Homework</title>
 </head>
+
 <body>
-<!--
+  <!--
 Обязательное задание.
 
 Необходимо реализовать четыре функции, каждая функция должна принимать по два
@@ -28,10 +30,37 @@
 
 Необходимо для всех функций прописать комментарии jsdoc https://jsdoc.app/.
 -->
-<script>
-  "use strict";
+  <script>
+    "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
-</script>
+    const a = Number(prompt('Введите первое число: '));
+    const b = Number(prompt('Введите второе число: '));
+
+    console.log(summa(a, b));
+    console.log(difference(a, b));
+    console.log(multiplication(a, b));
+    console.log(division(a, b));
+
+    function summa(a, b) {
+      return a + b;
+    }
+
+    function difference(a, b) {
+      if (a > b)
+        return a - b;
+      else if (b > a)
+        return b - a;
+      else return 0;
+    }
+
+    function multiplication(a, b) {
+      return a * b;
+    }
+
+    function division(a, b) {
+      return a / b;
+    }
+  </script>
 </body>
+
 </html>
