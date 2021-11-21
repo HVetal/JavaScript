@@ -45,14 +45,34 @@
       },
     ];
 
-    const result = products.filter(function (value) {
-      return value.photos !== undefined && value.photos.length !== 0;
-    });
-    console.log(result);
+    // const result = products.filter(function (value) {
+    //   return value.photos !== undefined && value.photos.length !== 0;
+    // });
 
-    products.sort(function (a, b) {
-      return a.price - b.price;
-    });
+    // const result = products.filter(function (product) {
+    //   return "photos" in product && product.photos.length > 0;
+    // });
+
+    // const result = products.filter(function (product) {
+    //   return product.photos?.length > 0;
+    // });
+
+    // const result = products.filter(product => product.photos?.length > 0);
+
+    // console.log(result);
+
+
+    // const result = products.filter(value => value.photos !== undefined && value.photos.length !== 0);
+    // console.log(result);
+
+
+
+    // products.sort(function (a, b) {
+    //   return a.price - b.price;
+    // });
+
+    products.sort((a, b) => a.price - b.price);
+
 
     console.log(products);
   </script>
