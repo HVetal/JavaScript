@@ -50,7 +50,75 @@
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  // function PostES5(username, text) {
+  //     this.username = username;
+  //     this.text = text;
+  //     this.datetime = '';
+  //   }
+
+  //   PostES5.prototype.edit = function () {
+  //     this.text = prompt('Введите новый текст поста');
+  //     this.datetime = new Date();
+  //   };
+
+  //   function AttachedPostES5(username, text, highlighted) {
+  //     PostES5.call(this, username, text);
+  //     this.highlighted = false;
+  //   }
+
+  //   AttachedPostES5.prototype.makeTextHighlighted = function () {
+  //     this.highlighted =true;
+  //   };
+
+  //   const pes5 = new PostES5('Иван', 'Текст автора Иван');
+  //   console.log(pes5);
+
+  //   pes5.edit();
+  //   console.log(pes5);
+
+  //   const postes5 = new AttachedPostES5('Коля', 'Текст автора Коля');
+  //   console.log(postes5);
+
+  //   postes5.makeTextHighlighted();
+  //   console.log(postes5);
+
+  //   console.log(pes5);
+
+
+
+    class PostES6 {
+      constructor(username, text) {
+      this.username = username;
+      this.text = text;
+      this.datetime = '';
+      }
+      edit() {
+        this.text = prompt('Введите новый текст поста');
+        this.datetime = new Date();
+      }
+    }
+
+    class  AttachedPostES6 extends PostES6 { 
+      constructor(username, text, highlighted) {
+        super(username, text);
+        this.highlighted = false;
+      }
+      makeTextHighlighted() {
+        this.highlighted =true;
+      }
+    }
+
+    // const pes6 = new PostES6('Илья', 'Текст автора Илья');
+    // console.log(pes6);
+
+    // pes6.edit();
+    // console.log(pes6);
+
+    const postes6 = new AttachedPostES6 ('Илья', 'Текст автора Илья');
+    console.log(postes6);
+
+    postes6.makeTextHighlighted();
+    console.log(postes6);
 </script>
 </body>
 </html>
