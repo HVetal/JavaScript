@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Homework</title>
 </head>
+
 <body>
-<!--
+  <!--
 Обязательное задание.
 
 Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
@@ -47,50 +49,50 @@
 что-нибудь пропустить.
 4. Если непонятно условие - задайте вопрос.
 -->
-<script>
-  "use strict";
+  <script>
+    "use strict";
 
-  // function PostES5(username, text) {
-  //     this.username = username;
-  //     this.text = text;
-  //     this.datetime = '';
-  //   }
+    function PostES5(username, text) {
+      this.username = username;
+      this.text = text;
+      this.datetime = new Date();
+    }
 
-  //   PostES5.prototype.edit = function () {
-  //     this.text = prompt('Введите новый текст поста');
-  //     this.datetime = new Date();
-  //   };
+    PostES5.prototype.edit = function () {
+      this.text = prompt('Введите новый текст поста');
+      this.datetime = new Date();
+    };
 
-  //   function AttachedPostES5(username, text, highlighted) {
-  //     PostES5.call(this, username, text);
-  //     this.highlighted = false;
-  //   }
+    const pes5 = new PostES5('Иван', 'Текст автора Иван');
+    console.log(pes5);
 
-  //   AttachedPostES5.prototype.makeTextHighlighted = function () {
-  //     this.highlighted =true;
-  //   };
+    pes5.edit();
+    console.log(pes5);
 
-  //   const pes5 = new PostES5('Иван', 'Текст автора Иван');
-  //   console.log(pes5);
+    AttachedPostES5.prototype = Object.create(PostES5.prototype);
+    AttachedPostES5.prototype.constructor = AttachedPostES5;
 
-  //   pes5.edit();
-  //   console.log(pes5);
+    function AttachedPostES5(username, text) {
+      PostES5.call(this, username, text);
+      this.highlighted = false;
+    }
 
-  //   const postes5 = new AttachedPostES5('Коля', 'Текст автора Коля');
-  //   console.log(postes5);
+    AttachedPostES5.prototype.makeTextHighlighted = function () {
+      this.highlighted = true;
+      this.datetime = new Date();
+    };
 
-  //   postes5.makeTextHighlighted();
-  //   console.log(postes5);
+    const postes5 = new AttachedPostES5('Коля', 'Текст автора Коля');
+    console.log(postes5);
 
-  //   console.log(pes5);
-
-
+    postes5.makeTextHighlighted();
+    console.log(postes5);
 
     class PostES6 {
       constructor(username, text) {
-      this.username = username;
-      this.text = text;
-      this.datetime = '';
+        this.username = username;
+        this.text = text;
+        this.datetime = new Date();
       }
       edit() {
         this.text = prompt('Введите новый текст поста');
@@ -98,27 +100,29 @@
       }
     }
 
-    class  AttachedPostES6 extends PostES6 { 
-      constructor(username, text, highlighted) {
+    class AttachedPostES6 extends PostES6 {
+      constructor(username, text) {
         super(username, text);
         this.highlighted = false;
       }
       makeTextHighlighted() {
-        this.highlighted =true;
+        this.highlighted = true;
+        this.datetime = new Date();
       }
     }
 
-    // const pes6 = new PostES6('Илья', 'Текст автора Илья');
-    // console.log(pes6);
+    const pes6 = new PostES6('Илья', 'Текст автора Илья');
+    console.log(pes6);
 
-    // pes6.edit();
-    // console.log(pes6);
+    pes6.edit();
+    console.log(pes6);
 
-    const postes6 = new AttachedPostES6 ('Илья', 'Текст автора Илья');
+    const postes6 = new AttachedPostES6('Илья', 'Текст автора Илья');
     console.log(postes6);
 
     postes6.makeTextHighlighted();
     console.log(postes6);
-</script>
+  </script>
 </body>
+
 </html>
