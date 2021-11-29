@@ -56,13 +56,17 @@
   1. Необходимо вывести сообщение в консоль "все теги прогрузились", когда все
   теги будут созданы браузером.
   */
-
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('все теги прогрузились');
+  });
 
   /*
   2. Необходимо вывести сообщение в консоль "страница загрузилась", когда все
   ресурсы страницы будут загружены.
   */
-
+  window.addEventListener('load', () => {
+    console.log('страница загрузилась');
+  });
 
   /*
   3. При клике на какой-либо тег на странице в консоль должно выводиться
@@ -72,13 +76,20 @@
   у элемента, а также выводить в нижнем регистре верный тег в данной строке, по
   которому был совершен клик.
   */
-
+  // const tagEl = document.querySelector('button');
+  // tagEl.addEventListener('click', event => {
+  //   event.target.textContent = 'Кликнуто!';
+  //   event.target.disabled = true;
+  // });
 
   /*
   4. Сделайте, чтобы при наведении на textarea в консоли появлялось сообщение:
   "Вы навели на textarea."
    */
-
+  //  const tagTextarea = document.querySelector('textarea');
+  //  tagTextarea.addEventListener('mouseover', event => {
+  //   console.log('Вы навели на textarea.');
+  // });
 
   /*
   5. Необходимо повесить событие клика на тег ul. В обработчике события в

@@ -38,6 +38,7 @@
     вывести этот элемент в консоль.
      */
     console.log(document.getElementById('super_link'));
+    //console.log(document.querySelector('#super_link')); 
 
     /*
     2. Внутри всех элементов на странице, которые имеют класс "card-link",
@@ -52,24 +53,22 @@
     3. Найти все элементы на странице с классом "card-link", которые лежат в
     элементе с классом "card-body" и вывести полученную коллекцию в консоль.
      */
-
-    // const cardBodyEl = document.getElementsByClassName('card-body');
-    // for (let i = 0; i < cardBodyEl.length; i++) {
-    //   classCardLink[i].innerText = 'ссылка';
-    // }
-    //console.log(document.getElementsByClassName("card-link"));
-    // const CardBodyInEls = document.getElementsByClassName('card-body');
-    // console.log(CardBodyInEls.querySelectorAll('card-link'));
-    // for (let i = 0; i < CardBodyInEls.length; i++) {
-    //   console.log(CardBodyInEls[i]);
-    }
+    const classCardBody = document.querySelector('.card-body');
+    console.log(classCardBody.getElementsByClassName('card-link'));
 
     /*
     4. Найти первый попавшийся элемент на странице у которого есть атрибут
     data-number со значением 50 и вывести его в консоль.
      */
+    // const attrNumber = document.querySelectorAll('*');
+    // for (let i = 0; i < attrNumber.length; i++) {
+    //   if (attrNumber[i].children.getAttribute('data-number') = 50) {
+    //     console.log(attrNumber[i].children.getAttribute('data-number'));
+    //   };
+    // }
 
-
+    //console.log(attrNumber.getAttribute('data-number') = 50);
+    console.log(attrNumber);
     /*
     5. Выведите содержимое тега title в консоль.
      */
@@ -82,16 +81,17 @@
     const classCardTitle = document.querySelector('.card-title');
     console.log(classCardTitle.parentElement);
 
-
     /*
     7. Создайте тег `p`, запишите внутри него текст "Привет" и добавьте созданный
     тег в начало элемента, который имеет класс "card".
      */
     const pTag = document.createElement('p');
     pTag.innerText = 'Привет';
+
     const classCard = document.getElementsByClassName('card');
     for (let i = 0; i < classCard.length; i++) {
       classCard[i].insertAdjacentElement('afterbegin', pTag);
+    //   classCard[i].prepend(pTag);
     }
 
     /*
