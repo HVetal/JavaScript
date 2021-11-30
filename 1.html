@@ -45,9 +45,12 @@
     поменяйте текст внутри элемента на "ссылка".
      */
     const classCardLink = document.getElementsByClassName('card-link');
-    for (let i = 0; i < classCardLink.length; i++) {
-      classCardLink[i].innerText = 'ссылка';
+    for (const element of classCardLink) {
+      element.innerText = 'ссылка';
     }
+    // for (let i = 0; i < classCardLink.length; i++) {
+    //   classCardLink[i].innerText = 'ссылка';
+    // }
 
     /*
     3. Найти все элементы на странице с классом "card-link", которые лежат в
@@ -60,15 +63,14 @@
     4. Найти первый попавшийся элемент на странице у которого есть атрибут
     data-number со значением 50 и вывести его в консоль.
      */
-    // const attrNumber = document.querySelectorAll('*');
-    // for (let i = 0; i < attrNumber.length; i++) {
-    //   if (attrNumber[i].children.getAttribute('data-number') = 50) {
-    //     console.log(attrNumber[i].children.getAttribute('data-number'));
-    //   };
-    // }
+    const attrNumber = document.querySelectorAll('a, div, h5, h6, p');
+    for (const attr of attrNumber) {
+      if (attr.dataset.number === "50") {
+        console.log(attr);
+        break;
+      };
+    }
 
-    //console.log(attrNumber.getAttribute('data-number') = 50);
-    console.log(attrNumber);
     /*
     5. Выведите содержимое тега title в консоль.
      */
@@ -89,9 +91,12 @@
     pTag.innerText = 'Привет';
 
     const classCard = document.getElementsByClassName('card');
-    for (let i = 0; i < classCard.length; i++) {
-      classCard[i].insertAdjacentElement('afterbegin', pTag);
-    //   classCard[i].prepend(pTag);
+    for (const element of classCard) {
+      element.insertAdjacentElement('afterbegin', pTag);
+
+      // for (let i = 0; i < classCard.length; i++) {
+      //   classCard[i].insertAdjacentElement('afterbegin', pTag);
+      //   classCard[i].prepend(pTag);
     }
 
     /*
