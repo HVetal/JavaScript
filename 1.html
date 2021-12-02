@@ -22,17 +22,20 @@
 -->
 <div class="product">
   <div class="productName">Товар 1</div>
-  <img src="http://lorempixel.com/200/300/food/1/" alt="">
+  <img src="https://img1.exportersindia.com/final_catg_image/66054-510.jpg" 
+  alt="">
   <button>В корзину</button>
 </div>
 <div class="product">
   <div class="productName">Товар 2</div>
-  <img src="http://lorempixel.com/200/300/food/2/" alt="">
+  <img src="http://www.h2biz.net/images/Plats/crop_min_20200331213026.jpg" 
+  alt="">
   <button>В корзину</button>
 </div>
 <div class="product">
   <div class="productName">Товар 3</div>
-  <img src="http://lorempixel.com/200/300/food/3/" alt="">
+  <img src="https://img1.exportersindia.com/final_catg_image/66054-510.jpg" 
+  alt="">
   <button>В корзину</button>
 </div>
 
@@ -42,19 +45,29 @@
   /*
   1. Установите всем элементам с классом "productName" размер шрифта 24px.
    */
-
+  document.querySelectorAll('.productName').
+    forEach(el => el.setAttribute('style', 'font-size: 24px'));
 
   /*
   2. Установите всем элементам с классом "product" внешний отступ справа 50px.
    */
-
+   document.querySelectorAll('.product').
+    forEach(el => el.setAttribute('style', 'margin-right: 50px'));
 
   /*
   3. При клике на кнопку "В корзину" название кнопки должно поменяться на
   "Добавлено" и кнопка должна стать неактивной.
    */
+  const addingBtn = function () {
+    document.querySelectorAll('button')
+      .forEach(el => el.addEventListener('click', event => {
+        event.target.textContent = 'Добавлено';
+        event.target.disabled = true;
+      })
+    )
+  }
 
-
+  addingBtn();
   /*
   4. Создайте полную (глубокую) копию элемента с классом product, измените в
   этой копии путь до картинки на:
@@ -63,13 +76,25 @@
   отображенный товар на странице на созданную копию. У данной копии также
   должен правильно работать код из 3-го задания.
    */
-
+  const product = document.querySelector('.product');
+  const productClone = product.cloneNode(true); 
+  productClone.querySelector('img')
+  .setAttribute('src', 'https://sun9-16.userapi.com/s/v1/ig2/' + 
+  '-m2lq9Hh6bX5fJdvrT0_U-M6f_09n4q_dInh96MlLz8N3mtGhmGYJonG66t_' + 
+  'cDMFVuMvnadZ8v9p-Dgft_INcoFV.jpg?size=200x0&quality=96&crop=' + 
+  '299,0,1080,1080&ava=1');
+  productClone.querySelector('div').textContent = 'Товар 4';
+  document.querySelector('.product:last-of-type').remove();
+  document.body.appendChild(productClone);
+  addingBtn();
 
   /*
   5. По истечению 2 секунд с момента открытия страницы первый товар должен быть
   удален из html.
    */
-
+   window.addEventListener('load', () => 
+   setTimeout(() => 
+   document.querySelector('div:nth-child(1)').remove(), 2000));
 
 </script>
 </body>
