@@ -22,17 +22,20 @@
 -->
 <div class="product">
   <div class="productName">Товар 1</div>
-  <img src="https://img1.exportersindia.com/final_catg_image/66054-510.jpg" alt="">
+  <img src="https://img1.exportersindia.com/final_catg_image/66054-510.jpg" 
+  alt="">
   <button>В корзину</button>
 </div>
 <div class="product">
   <div class="productName">Товар 2</div>
-  <img src="http://www.h2biz.net/images/Plats/crop_min_20200331213026.jpg" alt="">
+  <img src="http://www.h2biz.net/images/Plats/crop_min_20200331213026.jpg" 
+  alt="">
   <button>В корзину</button>
 </div>
 <div class="product">
   <div class="productName">Товар 3</div>
-  <img src="https://pirateread.files.wordpress.com/2017/10/cropped-website-design4.jpg?w=200" alt="">
+  <img src="https://img1.exportersindia.com/final_catg_image/66054-510.jpg" 
+  alt="">
   <button>В корзину</button>
 </div>
 
@@ -55,13 +58,16 @@
   3. При клике на кнопку "В корзину" название кнопки должно поменяться на
   "Добавлено" и кнопка должна стать неактивной.
    */
-  const btn = document.querySelectorAll('button');
-  //const btnFunc = function () {
-    btn.forEach(el => el.addEventListener('click', event => {
-    event.target.textContent = 'Добавлено';
-    event.target.disabled = true;
-  }));
+  const addingBtn = function () {
+    document.querySelectorAll('button')
+      .forEach(el => el.addEventListener('click', event => {
+        event.target.textContent = 'Добавлено';
+        event.target.disabled = true;
+      })
+    )
+  }
 
+  addingBtn();
   /*
   4. Создайте полную (глубокую) копию элемента с классом product, измените в
   этой копии путь до картинки на:
@@ -73,27 +79,14 @@
   const product = document.querySelector('.product');
   const productClone = product.cloneNode(true); 
   productClone.querySelector('img')
-  .setAttribute('src', 'https://sun9-16.userapi.com/s/v1/ig2/-m2lq9Hh6bX5fJdvrT0_U-M6f_09n4q_dInh96MlLz8N3mtGhmGYJonG66t_cDMFVuMvnadZ8v9p-Dgft_INcoFV.jpg?size=200x0&quality=96&crop=299,0,1080,1080&ava=1');
+  .setAttribute('src', 'https://sun9-16.userapi.com/s/v1/ig2/' + 
+  '-m2lq9Hh6bX5fJdvrT0_U-M6f_09n4q_dInh96MlLz8N3mtGhmGYJonG66t_' + 
+  'cDMFVuMvnadZ8v9p-Dgft_INcoFV.jpg?size=200x0&quality=96&crop=' + 
+  '299,0,1080,1080&ava=1');
   productClone.querySelector('div').textContent = 'Товар 4';
-  document.querySelector('div:nth-child(3').remove();
-  //let elem3 = document.querySelector('div:nth-child(3)');
+  document.querySelector('.product:last-of-type').remove();
   document.body.appendChild(productClone);
-  console.dir(productClone);
-  //console.dir(elem3);
-  //elem3 = productClone;
-  
-  
-  //btnFunc();
-  //console.dir(productClone);
-  // const btn = document.querySelectorAll('button');
-  // btn.forEach(el => el.addEventListener('click', event => {
-  //   event.target.textContent = 'Добавлено';
-  //   event.target.disabled = true;
-  // }));
-
-  // newProduct.removeAttribute('src');
-  // newProduct.setAttribute('src', 'https://sun9-16.userapi.com/s/v1/ig2/-m2lq9Hh6bX5fJdvrT0_U-M6f_09n4q_dInh96MlLz8N3mtGhmGYJonG66t_cDMFVuMvnadZ8v9p-Dgft_INcoFV.jpg?size=200x0&quality=96&crop=299,0,1080,1080&ava=1');
-  //pTag.remove(); https://sun1-88.userapi.com/s/v1/if1/2u-HRl7kcdvwWUCkFYpTb9YLfC5E0lbdoLp5exw9Q8vKS4vwgbvSY-4BKXnn1TIcqK995Gs-.jpg?size=200x0&quality=96&crop=198,0,799,799&ava=1
+  addingBtn();
 
   /*
   5. По истечению 2 секунд с момента открытия страницы первый товар должен быть
@@ -102,7 +95,6 @@
    window.addEventListener('load', () => 
    setTimeout(() => 
    document.querySelector('div:nth-child(1)').remove(), 2000));
-
 
 </script>
 </body>

@@ -43,35 +43,50 @@
     golden, также такой класс должен ставиться всем звездам до нее слева.
     */
 
-    const stars = document.querySelectorAll('i');
-    // stars.forEach(starEl => starEl.addEventListener('mouseover', () => {
-    //   starEl.classList.add('golden')
-    // }));
-    for (const starEl of stars) {
-      starEl.addEventListener('mouseover', () => {
-        for (const i = 0; i < starEl; i++) {
-          stars[i].classList.add('golden');
-        }
-      })
-    }
+    // const stars = document.querySelectorAll('i');
+    //   for (let i = 0; i < stars.length; i++) {
+    //     stars[i].addEventListener('mouseover', () => {
+    //       stars[i].classList.add('golden');
+    //       if (i > 0) {
+    //         for (let star = 0; i > star; star++) {
+    //           stars[star].classList.add('golden');
+    //         }
+    //       }
+    //    });
+    //   }
 
-    //.addEventListener('mouseover', () => {
-    //for (i=1)
-    // querySelector('div').addEventListener('focus', event => {
-    //   console.log('Привет');
-    // });
-    //event.target.style.cssText = '';
     /*
     2. Когда мы уводим курсор мыши от звезды, все поставленные классы из первого
     задания должны быть удалены.
      */
-
-
+    const stars = document.querySelectorAll('i');
+    for (let i = 0; i < stars.length; i++) {
+      stars[i].addEventListener('mouseover', () => {
+        stars[i].classList.add('golden');
+          if (i > 0) {
+            for (let star = 0; i > star; star++) {
+              stars[star].classList.add('golden');
+            }
+          }
+      });
+      stars[i].addEventListener('mouseout', () => {
+          stars[i].classList.remove('golden');
+          if (i > 0) {
+            for (let star = 0; i > star; star++) {
+               stars[star].classList.remove('golden');
+            }
+          }
+      });
+    }
+      
     /*
     3. Когда мы переводим мышь от одной звезды к другой, у нас могут мигать
     звезды (временно могут становиться черными). Почему так? Напишите словами.
     Можем ли мы это исправить? Если да, то предложите решение.
     */
+    // Это происходит из-за того, что курсор мышки попадает между элементами, 
+    // на которые повешен обработчик события. Возможно, это можно решить 
+    // временной задержкой или положением курсора мышки по оси Х.
   </script>
 </body>
 

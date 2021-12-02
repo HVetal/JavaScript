@@ -97,11 +97,7 @@
   const inputEl = document.querySelector('form').querySelector('input');
   const sendBtn = document.querySelector('form').querySelector('button');
 
-  inputEl.addEventListener('focus', event => {
-    inputEl.classList.add('error');
-  });
-
-    inputEl.addEventListener('input', event => {
+  inputEl.addEventListener('input', event => {
     inputEl.classList.remove('error');
   });
 
@@ -112,27 +108,13 @@
   sendBtn.addEventListener('click', event => {
     if (inputEl.value === '') {
       inputEl.classList.add('error');
+      event.preventDefault();
     }
     if (inputSel.value === '') {
       inputSel.classList.add('error');
+      event.preventDefault();
     }
-    event.preventDefault();
    });
-  // отменяет отправку формы formEl
-  // formEl.addEventListener('submit', event => {
-  //   event.preventDefault();
-  // });
-
-  // const inputEl = document.querySelector('input');
-
-  // inputEl.addEventListener('focus', event => {
-  //   event.Target.style.cssText = 'outline: 3px solid red;';
-  // });
-  // inputEl.addEventListener('blur', event => {
-  //   event.Target.style.removeProperty('outline');
-  // });
-
-
 </script>
 </body>
 </html>
