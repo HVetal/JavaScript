@@ -16,7 +16,7 @@ class Product {
       return `
       <div class="product">
           <div>${this.name}</div>
-          <img src="${this.imageUrl}" alt="">
+        //   <img src="${this.imageUrl}" alt="">
           <div>Цена: <span>${this.price}</span> р.</div>
           <a href="https://example.com/producs/${this.id}">Подробнее</a>
       </div>
@@ -44,13 +44,15 @@ class Product {
 //       .map(product => product.getProductMarkup()).join('');
 //   });
 const buttonAddToCart = document.querySelectorAll('.addToCart');
-
-buttonAddToCart.forEach(button => button.addEventListener('click', () => {
+const basketWindow = document.querySelectorAll('.popupBasket');
+buttonAddToCart.forEach(button => button.addEventListener('click', event => {
 if (!event.target) {
     return;
 }
+basketWindow.textContent = products[event.target.dataset.type]
+          .map(product => product.getProductMarkup());
+
 document.querySelector('.basketCount').textContent = product++;
-console.log('add');
 }));
 
 document.querySelector('.cartIcon').addEventListener('click', event => {
@@ -61,24 +63,6 @@ document.querySelector('.cartIcon').addEventListener('click', event => {
 }
 });
 
-// document.querySelector('ul').addEventListener('click', event => {
-//     const aTag = event.target;
-//     const aTags = document.querySelectorAll('.nav-link');
-//     if (aTag.tagName !== "A") {
-//       return;
-//     }
-//     aTags.forEach(el => {
-//       el.classList.remove('active');
-//     });
-//     aTag.classList.add('active');
-//     let attrText = aTag.parentElement.dataset.text;
-    
-//     if (attrText === "T1") {
-//       document.querySelector('div.text').textContent = panelText["T1"];
-//     } else if (attrText === "X6") {
-//       document.querySelector('div.text').textContent = panelText["X6"];
-//     } else if (attrText === "H99") {
-//       document.querySelector('div.text').textContent = panelText["H99"];
-//     }
-//     });
+
+
 
