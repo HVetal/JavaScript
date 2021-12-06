@@ -709,3 +709,15 @@ body {
         margin-top: 40px;
     }
 }
+
+.popupBasket {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 400px;
+    height: 150px;
+    top: 74px;
+    right: 0;
+    display: none;
+}
+
