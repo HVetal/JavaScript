@@ -712,12 +712,33 @@ body {
 
 .popupBasket {
     position: absolute;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
     background-color: #fff;
-    border: 1px solid #ccc;
-    width: 400px;
+    width: 500px;
     height: 150px;
     top: 74px;
     right: 0;
     display: none;
 }
 
+.ProductMarkup {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ebebeb;
+    padding-bottom: 10px;
+}
+
+.basketHeader {
+    font-weight: bold;
+}
+
+.basketTotal {
+    font-weight: bold;
+    text-align: right;
+}
