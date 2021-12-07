@@ -54,32 +54,49 @@ class Product {
 //     return;
 //   }
 //   document.querySelector('.basketCount').textContent = ++product;
-  // for (const attr of event.target.parentElement.parentElement.parentElement.dataset) {
-  //   console.log(attr);
-  // }
-  //const attr = document.querySelectorAll('.featuredItem')
-  const parents = document.querySelectorAll('.featuredItem');
-  const sum = 0;
-  let productCart = 0;
-  let products = [];
-  for (let i = 0, parent; parent = parents[i]; i++) {
-    parent.addEventListener('click', event => {
-      if (event.target.className === 'addToCart') {
-        document.querySelector('.basketCount').textContent = ++productCart;
-        parent.dataset.count = 1;
-        //sum = parent.dataset.price * count;
-        addToCartFunc(parent.dataset.id, parent.dataset.name, parent.dataset.price, parent.dataset.count, productCart);
+// for (const attr of event.target.parentElement.parentElement.parentElement.dataset) {
+//   console.log(attr);
+// }
+//const attr = document.querySelectorAll('.featuredItem')
+const parents = document.querySelectorAll('.featuredItem');
+const sum = 0;
+let productInCart = 0;
+const products = [];
+for (let i = 0, parent; parent = parents[i]; i++) {
+  parent.addEventListener('click', event => {
+    if (event.target.className === 'addToCart') {
+      document.querySelector('.basketCount').textContent = ++productInCart;
+      addToCartFunc(parent.dataset.id, parent.dataset.name, parent.dataset.price, parent.dataset.count, productInCart);
 
+      //parent.dataset.count = 1;
+      //sum = parent.dataset.price * count;
 
-        //console.log(parent.dataset);
-      }
-    });
-  }
-  const cartWindow = document.querySelector('.popupBasket');
+      //console.log(parent.dataset);
+    }
+  });
+}
+const cartWindow = document.querySelector('.popupBasket');
+
 function addToCartFunc(id, name, price, count, i) {
-  products[i] = new Product(id, name, price, count); 
-  cartWindow.innerHTML += products[i].getProductMarkup();
-  //console.log(products);
+  if (i === 1) {
+    products[0] = new Product(id, name, price, count);
+    products[0]["count"] = Number(products[0]["count"]) + 1;
+    cartWindow.innerHTML += products[0].getProductMarkup();
+    //console.log(products);
+  } else {
+    let productLength = products.length;
+    for (let num = 0; num < productLength; num++) {
+      if (products[num]["id"] === id) {
+        products[num]["count"] = Number(products[num]["count"]) + 1;
+        //console.log(products);
+      } else {
+        products[i] = new Product(id, name, price, count);
+        products[i]["count"] = Number(products[i]["count"]) + 1;
+        cartWindow.innerHTML += products[i].getProductMarkup();
+        console.log(products);
+      }
+    }
+  }
 }
 
 //console.log(cartWindow);
@@ -90,12 +107,13 @@ function addToCartFunc(id, name, price, count, i) {
 
 // const cartWindow = document.querySelector('.featuredTitle');
 // cartWindow.insertAdjacentText = products[1]["name"];
- function print (products) {
- for (let key in products) {
+function print(products) {
+  for (let key in products) {
     return products.map(product => product.getProductMarkup());
     // console.log(products[key]);
-// return key.map(product => product.getProductMarkup());
-}}
+    // return key.map(product => product.getProductMarkup());
+  }
+}
 //   const attr = event.target.classList.contains(".featuredItem").dataset;
 //   addToCartFunc(attr.id, attr.name, attr.price, attr.count);
 // });
