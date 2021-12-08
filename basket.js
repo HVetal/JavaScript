@@ -1,39 +1,27 @@
 'use strict';
 
-
 class Product {
-  constructor(id, name, price, count) {
+  constructor(id, name, price, count, summa) {
     this.id = id;
     this.name = name;
     this.price = price;
     this.count = count;
+    this.summa = summa;
   }
-
   /**
    * @returns {string} html-разметка для товара
    */
   getProductMarkup() {
     return `
       <div class="ProductMarkup">
-          <div>${this.id}</div>
           <div>${this.name}</div>
-          <div>$${this.price}</div>
           <div>${this.count}</div>
+          <div>$${this.price}</div>
+          <div>${this.summa}</div>
       </div>
     `;
   }
 }
-
-// const products = {
-//   productEls: [
-//     new Product(1, "ELLERY X M'O CAPSULE 1", 12.00, "images/featured/1.jpg"),
-//     new Product(2, "ELLERY X M'O CAPSULE 2", 22.00, "images/featured/2.jpg"),
-//     new Product(3, "ELLERY X M'O CAPSULE 3", 32.00, "images/featured/3.jpg"),
-//     new Product(4, "ELLERY X M'O CAPSULE 4", 42.00, "images/featured/4.jpg"),
-//     new Product(5, "ELLERY X M'O CAPSULE 5", 52.00, "images/featured/5.jpg"),
-//     new Product(7, "ELLERY X M'O CAPSULE 6", 62.00, "images/featured/6.jpg"),
-//   ]
-// };
 
 //   const productsEl = document.querySelector('.products');
 //   document.querySelector('header').addEventListener('click', event => {
@@ -59,14 +47,15 @@ class Product {
 // }
 //const attr = document.querySelectorAll('.featuredItem')
 const parents = document.querySelectorAll('.featuredItem');
-const sum = 0;
+let sum = 0;
 let productInCart = 0;
 const products = [];
+let element = 0;
 for (let i = 0, parent; parent = parents[i]; i++) {
   parent.addEventListener('click', event => {
     if (event.target.className === 'addToCart') {
       document.querySelector('.basketCount').textContent = ++productInCart;
-      addToCartFunc(parent.dataset.id, parent.dataset.name, parent.dataset.price, parent.dataset.count, productInCart);
+      addToCartFunc(parent.dataset.id, parent.dataset.name, parent.dataset.price, parent.dataset.count);
 
       //parent.dataset.count = 1;
       //sum = parent.dataset.price * count;
@@ -77,27 +66,40 @@ for (let i = 0, parent; parent = parents[i]; i++) {
 }
 const cartWindow = document.querySelector('.popupBasket');
 
-function addToCartFunc(id, name, price, count, i) {
-  if (i === 1) {
-    products[0] = new Product(id, name, price, count);
+function addToCartFunc(id, name, price, count) {
+    let productLength = products.length;
+    let flag = false;
+  if (productLength === 0) {
+    products[0] = new Product(id, name, price, count, price);
     products[0]["count"] = Number(products[0]["count"]) + 1;
-    cartWindow.innerHTML += products[0].getProductMarkup();
+    element++;
+    sum = sum + Number(products[0]["price"]);
+    //cartWindow.innerHTML += products[0].getProductMarkup();
     //console.log(products);
   } else {
-    let productLength = products.length;
+
     for (let num = 0; num < productLength; num++) {
       if (products[num]["id"] === id) {
         products[num]["count"] = Number(products[num]["count"]) + 1;
+        products[num]["summa"] = Number(products[num]["summa"]) + Number(products[num]["price"]);
+        sum = sum + Number(products[num]["price"]);
+        flag = true;
         //console.log(products);
-      } else {
-        products[i] = new Product(id, name, price, count);
-        products[i]["count"] = Number(products[i]["count"]) + 1;
-        cartWindow.innerHTML += products[i].getProductMarkup();
-        console.log(products);
+       } 
+    } 
+
+    if (!flag) {
+        products[element] = new Product(id, name, price, count, price);
+        products[element]["count"] = Number(products[element]["count"]) + 1;
+        sum = sum + Number(products[element]["price"]);
+        element++;
+        //break;
+        //cartWindow.innerHTML += products[i].getProductMarkup();
+    //     console.log(products);
       }
     }
   }
-}
+
 
 //console.log(cartWindow);
 // for (const el of products) {
@@ -107,13 +109,17 @@ function addToCartFunc(id, name, price, count, i) {
 
 // const cartWindow = document.querySelector('.featuredTitle');
 // cartWindow.insertAdjacentText = products[1]["name"];
-function print(products) {
-  for (let key in products) {
-    return products.map(product => product.getProductMarkup());
+
+
+// function print(products) {
+//   for (let key in products) {
+//     return products.map(product => product.getProductMarkup());
+
+
     // console.log(products[key]);
     // return key.map(product => product.getProductMarkup());
-  }
-}
+//   }
+// }
 //   const attr = event.target.classList.contains(".featuredItem").dataset;
 //   addToCartFunc(attr.id, attr.name, attr.price, attr.count);
 // });
@@ -124,11 +130,20 @@ function print(products) {
 //}
 
 // }));
-
+const basketTotal = document.querySelector('.basketTotal')
+document.querySelector('.cartIcon')
 document.querySelector('.cartIcon').addEventListener('click', event => {
   if (document.querySelector('.popupBasket').style.display === "block") {
     document.querySelector('.popupBasket').style.display = "none";
   } else {
+    basketTotal.innerHTML = ' ';
     document.querySelector('.popupBasket').style.display = "block";
+    
+    for (let el of products) {
+        basketTotal.insertAdjacentHTML('afterbegin', el.getProductMarkup());
+    }
+    //basketTotal.innerHTML += ' ';
+
+    document.querySelector('.basketTotalValue').textContent = sum;
   }
 });
