@@ -15,7 +15,7 @@ class Product {
     return `
       <div class="ProductMarkup">
           <div>${this.name}</div>
-          <div>${this.count}</div>
+          <div>${this.count} шт.</div>
           <div>$${this.price}</div>
           <div>${this.summa}</div>
       </div>
@@ -23,127 +23,84 @@ class Product {
   }
 }
 
-//   const productsEl = document.querySelector('.products');
-//   document.querySelector('header').addEventListener('click', event => {
-//     if (event.target.classList.contains('.menuButton')) {
-//       return;
-//     }
-//     productsEl.innerHTML = products[event.target.dataset.type]
-//       .map(product => product.getProductMarkup()).join('');
-//   });
-// const buttonAddToCart = document.querySelectorAll('.addToCart');
-// const basketWindow = document.querySelectorAll('.popupBasket');
-// buttonAddToCart.forEach(button => button.addEventListener('click', event => {
-//   if (!event.target) {
-//     return;
-//   }
-// document.querySelector('.featuredItems').addEventListener('click', event => {
-//   if (event.target.classList.contains(".addToCart")) {
-//     return;
-//   }
-//   document.querySelector('.basketCount').textContent = ++product;
-// for (const attr of event.target.parentElement.parentElement.parentElement.dataset) {
-//   console.log(attr);
-// }
-//const attr = document.querySelectorAll('.featuredItem')
 const parents = document.querySelectorAll('.featuredItem');
-let sum = 0;
-let productInCart = 0;
-const products = [];
-let element = 0;
+let sum = 0; //стоимость всех товаров
+let productInCart = 0; //число товаров в корзине
+const products = []; // массив объектов товара
+let element = 0; //количество разных товаров 
+// ищем родителя нажатой кнопки
 for (let i = 0, parent; parent = parents[i]; i++) {
   parent.addEventListener('click', event => {
     if (event.target.className === 'addToCart') {
+      //если нажали по кнопке, увеличиваем количество товара в корзине
       document.querySelector('.basketCount').textContent = ++productInCart;
-      addToCartFunc(parent.dataset.id, parent.dataset.name, parent.dataset.price, parent.dataset.count);
-
-      //parent.dataset.count = 1;
-      //sum = parent.dataset.price * count;
-
-      //console.log(parent.dataset);
+      // и вызываем функцию добавления товара в корзину с параметрами-атрибутами
+      addToCartFunc(parent.dataset.id, parent.dataset.name,
+        parent.dataset.price, parent.dataset.count);
     }
   });
 }
-const cartWindow = document.querySelector('.popupBasket');
 
 function addToCartFunc(id, name, price, count) {
-    let productLength = products.length;
-    let flag = false;
+  let productLength = products.length; //количество товаров в корзине
+  let flag = false; // был ли добавлен такой товар в корзину
+  // добавляем первый товар в корзину
   if (productLength === 0) {
     products[0] = new Product(id, name, price, count, price);
+    // ставим его количество в корзине = 1
     products[0]["count"] = Number(products[0]["count"]) + 1;
+    // увеличиваем счетчик разных товаров
     element++;
+    //увеличиваем общую сумму покупки
     sum = sum + Number(products[0]["price"]);
-    //cartWindow.innerHTML += products[0].getProductMarkup();
-    //console.log(products);
   } else {
-
+    //если товар не первый в корзине, перебираем всю корзину
+    //и смотрим, был ли такой товар в корзине
     for (let num = 0; num < productLength; num++) {
+      //если такой товар уже есть в корзине
       if (products[num]["id"] === id) {
+        //увеличиваем его количество на 1
         products[num]["count"] = Number(products[num]["count"]) + 1;
-        products[num]["summa"] = Number(products[num]["summa"]) + Number(products[num]["price"]);
+        //прибавляем его стоимость к "количество * цена"
+        products[num]["summa"] = Number(products[num]["summa"]) +
+          Number(products[num]["price"]);
+        // увеличиваем общую стоимость всей корзины
         sum = sum + Number(products[num]["price"]);
+        //ставим флаг, что такой товар уже есть и новый создавать не надо
         flag = true;
-        //console.log(products);
-       } 
-    } 
-
-    if (!flag) {
-        products[element] = new Product(id, name, price, count, price);
-        products[element]["count"] = Number(products[element]["count"]) + 1;
-        sum = sum + Number(products[element]["price"]);
-        element++;
-        //break;
-        //cartWindow.innerHTML += products[i].getProductMarkup();
-    //     console.log(products);
       }
     }
-  }
-
-
-//console.log(cartWindow);
-// for (const el of products) {
-//     cartWindow.innertHTML = products.el;
-//    }
-
-
-// const cartWindow = document.querySelector('.featuredTitle');
-// cartWindow.insertAdjacentText = products[1]["name"];
-
-
-// function print(products) {
-//   for (let key in products) {
-//     return products.map(product => product.getProductMarkup());
-
-
-    // console.log(products[key]);
-    // return key.map(product => product.getProductMarkup());
-//   }
-// }
-//   const attr = event.target.classList.contains(".featuredItem").dataset;
-//   addToCartFunc(attr.id, attr.name, attr.price, attr.count);
-// });
-
-// function addToCartFunc(id, name, price, count) {
-
-//   console.log(id);
-//}
-
-// }));
-const basketTotal = document.querySelector('.basketTotal')
-document.querySelector('.cartIcon')
-document.querySelector('.cartIcon').addEventListener('click', event => {
-  if (document.querySelector('.popupBasket').style.display === "block") {
-    document.querySelector('.popupBasket').style.display = "none";
-  } else {
-    basketTotal.innerHTML = ' ';
-    document.querySelector('.popupBasket').style.display = "block";
-    
-    for (let el of products) {
-        basketTotal.insertAdjacentHTML('afterbegin', el.getProductMarkup());
+    //если такого товара еще нет в корзине
+    if (!flag) {
+      //добавляем новый товар в корзину
+      products[element] = new Product(id, name, price, count, price);
+      //ставим его количество в корзине = 1
+      products[element]["count"] = Number(products[element]["count"]) + 1;
+      //увеличиваем общую стоимость всей корзины
+      sum += Number(products[element]["price"]);
+      // увеличиваем счетчик разных товаров
+      element++;
     }
-    //basketTotal.innerHTML += ' ';
-
+  }
+}
+//выбираем div, куда будем выводить содержимое корзины
+const basketProductList = document.querySelector('.basketProductList');
+// при клике по корзине
+document.querySelector('.cartIcon').addEventListener('click', event => {
+  //если окно корзины видно на экране
+  if (document.querySelector('.popupBasket').style.display === "block") {
+    //то убрать его
+    document.querySelector('.popupBasket').style.display = "none";
+  } else { //иначе, если окно корзины было скрыто
+    // очистить, что выводилось в предыдущий раз
+    basketProductList.innerHTML = ' ';
+    //показать окно корзины
+    document.querySelector('.popupBasket').style.display = "block";
+    //вывести всё содержимое корзины в окно
+    for (let el of products) {
+      basketProductList.insertAdjacentHTML('afterbegin', el.getProductMarkup());
+    }
+    //вывести общую стоимость покупок
     document.querySelector('.basketTotalValue').textContent = sum;
   }
 });
